@@ -1,0 +1,122 @@
+<% layout("/layouts/boilerplate") %>
+
+<div class="favorites-page">
+
+    <!-- Heading -->
+
+    <div class="favorites-header">
+
+        <h2 class="title-main">
+            Your Favorites
+        </h2>
+
+        <p class="favorites-subtitle">
+            Places you saved for your next stay
+        </p>
+
+    </div>
+
+
+    <!-- Empty State -->
+
+    <% if(favorites.length === 0) { %>
+
+        <div class="empty-favorites">
+
+            <i class="fa-solid fa-heart"></i>
+
+            <h3>
+                No favorites yet
+            </h3>
+
+            <p>
+                Start exploring and save your favorite stays.
+            </p>
+
+            <a
+                href="/listings"
+                class="explore-btn"
+            >
+                Explore Listings
+            </a>
+
+        </div>
+
+
+    <% } else { %>
+
+
+        <!-- Favorites Grid -->
+
+        <div class="row">
+
+            <% favorites.forEach(listing => { %>
+
+                <div
+                    class="listing-card"
+                    onclick="window.location='/listings/<%= listing._id %>'"
+                >
+
+                    <!-- Image -->
+
+                    <div class="image-container">
+
+                        <img
+                            src="<%= listing.image.url %>"
+                            alt="listing"
+                            loading="lazy"
+                        >
+
+
+                        <!-- Favorite Button -->
+
+                        <form
+                            action="/listings/<%= listing._id %>/favorite"
+                            method="POST"
+                            class="favorite-form"
+                            onclick="event.stopPropagation()"
+                        >
+
+                            <button
+                                type="submit"
+                                class="heart-btn"
+                            >
+
+                                <i class="fa-solid fa-heart active"></i>
+
+                            </button>
+
+                        </form>
+
+                    </div>
+
+
+                    <!-- Content -->
+
+                    <div class="card-info">
+
+                        <p class="title">
+                            <%= listing.title %>
+                        </p>
+
+                        <p class="location-text">
+                            <%= listing.location %>,
+                            <%= listing.country %>
+                        </p>
+
+                        <p class="card-text">
+                            ₹<%= listing.price %> Per Night
+                        </p>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+    <% } %>
+
+</div>
+

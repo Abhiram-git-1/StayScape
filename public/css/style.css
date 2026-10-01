@@ -1,0 +1,59 @@
+/* ========================================
+   GLOBAL
+======================================== */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: "Poppins", sans-serif;
+    
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1;
+}
+
+
+/* ========================================
+   BUTTONS
+======================================== */
+
+.btn-primary {
+    background-color: #fe424d !important;
+    border-color: #fe424d !important;
+
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #ff0011 !important;
+    border-color: #ff0011 !important;
+}
+
+.btn-dark {
+    background-color: #000000 !important;
+    border-color: #000000 !important;
+
+    transition:
+        background-color 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.btn-dark:hover {
+    background-color: #333333 !important;
+    border-color: #333333 !important;
+}

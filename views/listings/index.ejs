@@ -1,0 +1,193 @@
+<% layout("/layouts/boilerplate") %>
+
+<h2 class="title-main">
+    Explore stays
+</h2>
+
+
+<div class="filters-bar">
+
+    <!-- LEFT: FILTERS -->
+    <div class="filters-left">
+
+        <!-- ALL -->
+        <a
+            href="/listings"
+            class="filter <%= !category ? 'active' : '' %>"
+        >
+            <i class="fa-solid fa-border-all"></i>
+
+            <p>All</p>
+        </a>
+
+
+        <% const icons = {
+            trending: "fa-fire",
+            rooms: "fa-bed",
+            "iconic cities": "fa-city",
+            beach: "fa-umbrella-beach",
+            mountains: "fa-mountain",
+            forest: "fa-tree",
+            lake: "fa-water",
+            arctic: "fa-snowflake",
+            camping: "fa-campground",
+            historic: "fa-landmark",
+            luxury: "fa-crown",
+            cabins: "fa-house",
+            countryside: "fa-tree"
+        }; %>
+
+
+        <% categories.forEach(cat => { %>
+
+            <a
+                href="/listings?category=<%= cat %>"
+                class="filter <%= category === cat ? 'active' : '' %>"
+            >
+
+                <i class="fa-solid <%= icons[cat] || 'fa-tag' %>"></i>
+
+                <p>
+                    <%= cat.charAt(0).toUpperCase() + cat.slice(1) %>
+                </p>
+
+            </a>
+
+        <% }) %>
+
+    </div>
+
+
+    <!-- RIGHT: TOGGLE -->
+    <div class="filters-right">
+
+        <div class="toggle-pill">
+
+            <span>
+                Display total price
+            </span>
+
+            <label class="switch">
+
+                <input
+                    type="checkbox"
+                    id="taxToggle"
+                >
+
+                <span class="slider"></span>
+
+            </label>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<div
+    class="listings-grid"
+    data-page="<%= page %>"
+    data-has-more="<%= hasMore %>"
+    data-category="<%= category || '' %>"
+    data-search="<%= search || '' %>"
+>
+
+    <% listings.forEach(listing => { %>
+
+        <div
+            class="listing-card"
+            onclick="window.location='/listings/<%= listing._id %>'"
+        >
+
+            <!-- IMAGE -->
+
+            <div class="image-container">
+
+                <img
+                    src="<%= listing.image.url %>"
+                    alt="listing"
+                    loading="lazy"
+                >
+
+
+                <!-- FAVORITE -->
+
+                <% if(currentUser) { %>
+
+                    <form
+                        action="/listings/<%= listing._id %>/favorite"
+                        method="POST"
+                        class="favorite-form"
+                        onclick="event.stopPropagation()"
+                    >
+
+                        <button
+                            type="submit"
+                            class="heart-btn"
+                        >
+
+                            <% const isFavorite =
+                                currentUser.favorites &&
+                                currentUser.favorites.some(
+                                    fav => fav.equals(listing._id)
+                                );
+                            %>
+
+
+                            <% if(isFavorite) { %>
+
+                                <i class="fa-solid fa-heart active"></i>
+
+                            <% } else { %>
+
+                                <i class="fa-regular fa-heart"></i>
+
+                            <% } %>
+
+                        </button>
+
+                    </form>
+
+                <% } %>
+
+            </div>
+
+
+            <!-- CONTENT -->
+
+            <div class="card-info">
+
+                <p class="title">
+                    <%= listing.title %>
+                </p>
+
+
+                <p class="card-text">
+
+                    ₹<span class="base-price">
+                        <%= listing.price %> Per Night
+                    </span>
+
+
+                    <span class="tax-price d-none">
+
+                        (₹<%= Math.round(listing.price * 1.18) %> with tax)
+
+                    </span>
+
+                </p>
+
+            </div>
+
+        </div>
+
+    <% }) %>
+
+</div>
+
+
+<div id="load-trigger"></div>
+ <script src="/js/taxToggle.js"></script>
+ <script src="/js/infiniteScroll.js"></script>
+

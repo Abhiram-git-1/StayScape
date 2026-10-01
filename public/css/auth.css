@@ -1,0 +1,90 @@
+/*AUTH PAGES*/
+.auth-card {
+  width: 100%;
+  max-width: 450px;
+
+  background-color: white;
+}
+
+/*AUTH FORM */
+
+.auth-card .form-control:focus {
+  box-shadow: none;
+
+  border-color: #212529;
+}
+
+/*PASSWORD TOGGLE */
+
+#togglePassword,
+#toggleConfirmPassword {
+  cursor: pointer;
+}
+
+/*PASSWORD FEEDBACK*/
+
+#passwordStrength,
+#passwordMatch {
+  margin-top: 0.5rem;
+
+  font-weight: 600;
+}
+
+.password-weak {
+  color: #dc3545;
+}
+
+.password-medium {
+  color: #fd7e14;
+}
+
+.password-strong {
+  color: #198754;
+}
+
+.password-match {
+  color: #198754;
+}
+
+.password-no-match {
+  color: #dc3545;
+}
+
+/*AUTH DIVIDER*/
+
+.divider {
+  display: flex;
+
+  align-items: center;
+
+  margin: 1.5rem 0;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+
+  flex: 1;
+
+  height: 1px;
+
+  background: #ddd;
+}
+
+.divider span {
+  margin: 0 15px;
+
+  color: #777;
+
+  font-weight: 600;
+}
+
+/*AUTH BUTTONS */
+
+.auth-card .btn {
+  transition: transform 0.25s ease;
+}
+
+.auth-card .btn:hover {
+  transform: translateY(-2px);
+}

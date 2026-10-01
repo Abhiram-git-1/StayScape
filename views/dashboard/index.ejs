@@ -1,0 +1,142 @@
+<% layout("/layouts/boilerplate") %>
+    <div class="container dashboard-page">
+
+        <!-- Header -->
+        <div class="dashboard-header">
+
+            <h2>Host Dashboard 📊</h2>
+
+            <p>
+                Manage your listings and bookings
+            </p>
+
+        </div>
+
+        <!-- Stats -->
+        <div class="stats-grid">
+
+            <div class="stat-card">
+
+                <h3>
+                    <%= listings.length %>
+                </h3>
+
+                <p>Listings</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>
+                    <%= activeBookings.length %>
+                </h3>
+
+                <p>Active Bookings</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>
+                    <%= cancelledBookings.length %>
+                </h3>
+
+                <p>Cancelled Bookings</p>
+
+            </div>
+
+            <div class="stat-card">
+
+                <h3>
+                    ₹<%= totalRevenue.toLocaleString("en-IN") %>
+                </h3>
+
+                <p>Total Revenue</p>
+
+            </div>
+
+        </div>
+
+        <!-- Recent Bookings -->
+        <div class="dashboard-section">
+
+            <h3>Recent Bookings</h3>
+
+            <% if(bookings.length===0) { %>
+
+                <p class="empty-text">
+
+                    No bookings yet
+
+                </p>
+
+                <% } else { %>
+
+                    <div class="booking-list">
+
+                        <% bookings.forEach(booking=> { %>
+
+                            <div class="dashboard-booking">
+
+                                <img src="<%= booking.listing.image.url %>" alt="listing" loading="lazy">
+
+                                <div class="booking-info">
+
+                                    <h5>
+                                        <%= booking.listing.title %>
+                                    </h5>
+
+                                    <p>
+                                        Guest:
+                                        <b>
+                                            <%= booking.guest ? booking.guest.username : "Deleted User" %>
+                                        </b>
+                                    </p>
+
+                                    <p>
+                                        <%= booking.checkIn.toDateString() %>
+                                            →
+                                            <%= booking.checkOut.toDateString() %>
+                                    </p>
+
+                                </div>
+
+                                <div class="booking-right">
+
+                                    <div class="booking-price">
+
+                                        ₹<%= booking.totalPrice.toLocaleString("en-IN") %>
+
+                                    </div>
+
+                                    <% if(booking.status==="confirmed" ) { %>
+
+                                        <span class="dashboard-status confirmed">
+
+                                            Confirmed
+
+                                        </span>
+
+                                        <% } else { %>
+
+                                            <span class="dashboard-status cancelled">
+
+                                                Cancelled
+
+                                            </span>
+
+                                            <% } %>
+
+                                </div>
+
+                            </div>
+
+                            <% }) %>
+
+                    </div>
+
+                    <% } %>
+
+        </div>
+
+    </div>

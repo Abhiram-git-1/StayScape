@@ -1,0 +1,193 @@
+<nav class="navbar navbar-expand-md sticky-top ">
+  <div class="container-fluid px-4">
+
+    <!-- Logo -->
+    <a class="navbar-brand fw-bold fs-4" href="/listings">
+      <i class="fa-solid fa-house-chimney" style="color:#ff385c;"></i>
+      StayScape
+    </a>
+
+    <!-- Toggle -->
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+
+      <!-- LEFT LINKS -->
+      <ul class="navbar-nav gap-3">
+        <li class="nav-item">
+          <a class="nav-link nav-pill <%= (locals.currentPath || '').startsWith('/listings') ? 'active-link' : '' %>"
+            href="/listings">
+            Explore
+          </a>
+        </li>
+      </ul>
+
+      <div class="nav-center">
+        <form action="/listings" method="GET" class="search-bar d-flex align-items-center">
+          <input type="text" name="search" placeholder="Search destinations..." class="form-control search-input"
+            value="<%= search || '' %>">
+          <button class="btn search-btn">
+            <i class="fa fa-search"></i>
+          </button>
+        </form>
+      </div>
+
+      <!-- RIGHT MENU -->
+      <ul class="navbar-nav ms-auto align-items-center gap-2">
+
+        <% if(currentUser) { %>
+
+          <!-- Favorites -->
+          <li class="nav-item">
+
+            <a class="nav-link nav-pill <%= currentPath === '/listings/favorites' ? 'active-link' : '' %>"
+              href="/listings/favorites">
+
+              <i class="fa-regular fa-heart" style=<%=currentPath==='/listings/favorites' ? 'color:#ff385c;' : '' %>
+                ></i> Favorites </a>
+
+          </li>
+
+          <!-- Trips -->
+          <li class="nav-item">
+
+            <a class="nav-link nav-pill <%= currentPath === '/bookings/trips' ? 'active-link' : '' %>"
+              href="/bookings/trips">
+
+              My Trips
+
+            </a>
+
+          </li>
+
+          <!-- Host Features -->
+          <% if(currentUser.role==="host" ) { %>
+
+            <!-- Dashboard -->
+            <li class="nav-item">
+
+              <a class="nav-link nav-pill <%= currentPath === '/dashboard' ? 'active-link' : '' %>" href="/dashboard">
+
+                Dashboard
+
+              </a>
+
+            </li>
+
+            <!-- Add Listing -->
+            <li class="nav-item">
+
+              <a class="nav-link nav-pill <%= currentPath === '/listings/new' ? 'active-link' : '' %>"
+                href="/listings/new">
+
+                Airbnb your home
+
+              </a>
+
+            </li>
+
+            <% } %>
+
+              <% } %>
+
+                <!-- PROFILE DROPDOWN -->
+                <li class="nav-item dropdown">
+
+                  <a class="nav-link dropdown-toggle airbnb-profile" href="#" role="button" data-bs-toggle="dropdown">
+
+                    <b>☰</b>
+
+                    <% if (currentUser) { %>
+
+                      <i class="fa-solid fa-circle-user"></i>
+
+                      <%= currentUser.username %>
+
+                        <% } else { %>
+
+                          <i class="fa-regular fa-circle-user"></i>
+
+                          <% } %>
+
+                  </a>
+
+                  <ul class="dropdown-menu dropdown-menu-end airbnb-dropdown">
+
+                    <!-- Logged Out -->
+                    <% if (!currentUser) { %>
+
+                      <li>
+                        <a class="dropdown-item" href="/users/signup">
+
+                          Sign Up
+
+                        </a>
+                      </li>
+
+                      <li>
+                        <a class="dropdown-item" href="/users/login">
+
+                          Login
+
+                        </a>
+                      </li>
+
+                      <% } else { %>
+
+                        <!-- Welcome -->
+                        <li>
+
+                          <span class="dropdown-item-text">
+
+                            Hello, <%= currentUser.username %>
+
+                          </span>
+
+                        </li>
+
+                        <li>
+                          <hr class="dropdown-divider">
+                        </li>
+
+                        <!-- Become Host -->
+                        <% if(currentUser.role==="guest" ) { %>
+
+                          <li>
+
+                            <form action="/users/become-host?_method=PUT" method="POST">
+
+                              <button class="dropdown-item">
+
+                                Become a Host
+
+                              </button>
+
+                            </form>
+
+                          </li>
+
+                          <% } %>
+
+                            <!-- Logout -->
+                            <li>
+
+                              <a class="dropdown-item text-danger" href="/users/logout">
+
+                                Logout
+
+                              </a>
+
+                            </li>
+
+                            <% } %>
+
+                  </ul>
+
+                </li>
+
+      </ul>
+    </div>
+  </div>
+</nav>

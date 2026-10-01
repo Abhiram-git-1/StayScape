@@ -1,0 +1,204 @@
+/* ========================================
+   FAVORITES PAGE
+======================================== */
+
+.favorites-page {
+    padding: 1rem 2rem 3rem;
+}
+
+
+/* ========================================
+   HEADER
+======================================== */
+
+.favorites-header {
+    margin-bottom: 2rem;
+}
+
+.favorites-subtitle {
+    color: #717171;
+
+    margin-top: -0.3rem;
+
+    font-size: 0.95rem;
+}
+
+
+/* ========================================
+   EMPTY STATE
+======================================== */
+
+.empty-favorites {
+    min-height: 60vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 1rem;
+
+    text-align: center;
+}
+
+.empty-favorites i {
+    font-size: 4rem;
+
+    color: #ff385c;
+}
+
+.empty-favorites h3 {
+    font-weight: 600;
+}
+
+.empty-favorites p {
+    color: #717171;
+}
+
+
+/* ========================================
+   EXPLORE BUTTON
+======================================== */
+
+.explore-btn {
+    background: #ff385c;
+
+    color: white;
+
+    padding: 0.8rem 1.5rem;
+
+    border-radius: 999px;
+
+    text-decoration: none;
+
+    font-weight: 500;
+
+    transition: 0.2s ease;
+}
+
+.explore-btn:hover {
+    background: #e11d48;
+
+    color: white;
+}
+
+
+/* ========================================
+   FAVORITES GRID
+======================================== */
+
+.favorites-page .row {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fill, minmax(280px, 1fr));
+
+    gap: 1.8rem;
+}
+
+
+/* ========================================
+   FAVORITE CARD
+======================================== */
+
+.favorites-page .listing-card {
+    cursor: pointer;
+
+    transition: transform 0.2s ease;
+}
+
+.favorites-page .listing-card:hover {
+    transform: translateY(-4px);
+}
+
+
+/* ========================================
+   FAVORITE IMAGE
+======================================== */
+
+.favorites-page .image-container {
+    position: relative;
+}
+
+.favorites-page .image-container img {
+    width: 100%;
+
+    height: 270px;
+
+    object-fit: cover;
+
+    border-radius: 20px;
+}
+
+
+/* ========================================
+   FAVORITE BUTTON
+======================================== */
+
+.favorite-form {
+    position: absolute;
+
+    top: 14px;
+    right: 14px;
+}
+
+.favorites-page .heart-btn {
+    border: none;
+
+    background: rgba(255, 255, 255, 0.9);
+
+    width: 38px;
+    height: 38px;
+
+    border-radius: 50%;
+
+    font-size: 1.1rem;
+
+    cursor: pointer;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    transition: 0.2s ease;
+}
+
+.favorites-page .heart-btn:hover {
+    transform: scale(1.08);
+}
+
+.favorites-page .fa-heart.active {
+    color: #ff385c;
+}
+
+
+/* ========================================
+   CARD INFO
+======================================== */
+
+.favorites-page .card-info {
+    padding-top: 0.8rem;
+}
+
+.favorites-page .title {
+    font-weight: 600;
+
+    margin-bottom: 0.2rem;
+}
+
+.location-text {
+    color: #717171;
+
+    font-size: 0.92rem;
+
+    margin-bottom: 0.3rem;
+}
+
+.favorites-page .card-text {
+    font-weight: 500;
+}

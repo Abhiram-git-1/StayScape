@@ -1,0 +1,27 @@
+/* ⭐ STAR RATING STYLING */
+.star-rating {
+  direction: rtl; /* IMPORTANT for hover effect */
+  display: inline-flex;
+}
+
+.star-rating input {
+  display: none; /* hide radio buttons */
+}
+
+.star-rating label {
+  font-size: 2rem;
+  color: #ddd;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+
+/* hover effect */
+.star-rating label:hover,
+.star-rating label:hover ~ label {
+  color: #ff385c; /* Airbnb pink */
+}
+
+/* selected stars */
+.star-rating input:checked ~ label {
+  color: #ff385c;
+}

@@ -1,0 +1,170 @@
+/* ========================================
+   BOOKING CARD
+======================================== */
+
+.booking-card {
+    border: 1px solid #ddd;
+
+    border-radius: 20px;
+
+    padding: 1.5rem;
+
+    box-shadow:
+        0 6px 20px rgba(0, 0, 0, 0.08);
+
+    position: sticky;
+
+    top: 120px;
+
+    z-index: 1;
+
+    background: white;
+}
+
+
+/* ========================================
+   NIGHT TEXT
+======================================== */
+
+.night-text {
+    font-size: 1rem;
+
+    font-weight: 400;
+}
+
+
+/* ========================================
+   BOOKING DATES
+======================================== */
+
+.booking-dates {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    border: 1px solid #ddd;
+
+    border-radius: 12px;
+
+    overflow: hidden;
+
+    margin-top: 1rem;
+}
+
+
+/* ========================================
+   DATE FIELD
+======================================== */
+
+.date-field {
+    padding: 0.6rem;
+}
+
+.date-field:first-child {
+    border-right: 1px solid #ddd;
+}
+
+
+/* Date label */
+
+.date-field label {
+    font-size: 0.7rem;
+
+    font-weight: 700;
+
+    margin-bottom: 0.3rem;
+
+    display: block;
+}
+
+
+/* Date input */
+
+.date-field input {
+    border: none !important;
+
+    box-shadow: none !important;
+
+    padding: 0;
+}
+
+
+/* ========================================
+   RESERVE BUTTON
+======================================== */
+
+.reserve-btn {
+    width: 100%;
+
+    margin-top: 1rem;
+
+    border: none;
+
+    background: #ff385c;
+
+    color: white;
+
+    padding: 0.9rem;
+
+    border-radius: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    transition: 0.2s ease;
+
+    text-decoration: none;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+}
+
+.reserve-btn:hover {
+    background: #e11d48;
+
+    color: white;
+}
+
+
+/* ========================================
+   BOOKING NOTE
+======================================== */
+
+.booking-note {
+    text-align: center;
+
+    margin-top: 1rem;
+
+    color: #717171;
+
+    font-size: 0.9rem;
+}
+
+
+/* ========================================
+   PRICE SUMMARY
+======================================== */
+
+.price-summary {
+    margin-top: 1.5rem;
+}
+
+.price-row {
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 0.8rem;
+
+    color: #444;
+}
+
+.total-row {
+    font-size: 1.05rem;
+
+    color: black;
+}

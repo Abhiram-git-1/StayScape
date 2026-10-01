@@ -1,0 +1,287 @@
+/* ========================================
+   TRIPS PAGE
+======================================== */
+
+.trips-page {
+    padding: 2rem 0 4rem;
+}
+
+
+/* ========================================
+   TRIPS HEADER
+======================================== */
+
+.trips-header {
+    margin-bottom: 2rem;
+}
+
+.trips-header p {
+    color: #717171;
+}
+
+
+/* ========================================
+   EMPTY TRIPS
+======================================== */
+
+.empty-trips {
+    min-height: 60vh;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 1rem;
+}
+
+.empty-trips i {
+    font-size: 4rem;
+
+    color: #ff385c;
+}
+
+
+/* ========================================
+   EXPLORE BUTTON
+======================================== */
+
+.trips-page .explore-btn {
+    background: #ff385c;
+
+    color: white;
+
+    padding: 0.9rem 1.5rem;
+
+    border-radius: 999px;
+
+    text-decoration: none;
+}
+
+
+/* ========================================
+   TRIPS GRID
+======================================== */
+
+.trips-grid {
+    display: grid;
+
+    gap: 2rem;
+}
+
+
+/* ========================================
+   TRIP CARD
+======================================== */
+
+.trip-card {
+    display: grid;
+
+    grid-template-columns: 320px 1fr;
+
+    gap: 1.5rem;
+
+    border: 1px solid #ddd;
+
+    border-radius: 20px;
+
+    overflow: hidden;
+
+    background: white;
+
+    transition: 0.25s;
+}
+
+.trip-card:hover {
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.08);
+}
+
+
+/* ========================================
+   TRIP IMAGE
+======================================== */
+
+.trip-card img {
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+}
+
+
+/* ========================================
+   TRIP CONTENT
+======================================== */
+
+.trip-content {
+    padding: 1.5rem;
+}
+
+.trip-content p {
+    color: #717171;
+}
+
+
+/* ========================================
+   TRIP DATES
+======================================== */
+
+.trip-dates {
+    display: flex;
+
+    gap: 3rem;
+
+    margin: 1rem 0;
+}
+
+.trip-dates small {
+    font-weight: 700;
+}
+
+
+/* ========================================
+   TRIP FOOTER
+======================================== */
+
+.trip-footer {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-top: 1rem;
+}
+
+
+/* ========================================
+   BOOKING STATUS
+======================================== */
+
+.status {
+    padding: 0.45rem 0.9rem;
+
+    border-radius: 999px;
+
+    font-weight: 600;
+
+    font-size: 0.85rem;
+}
+
+.trips-page .upcoming {
+    background: #dcfce7;
+
+    color: #166534;
+}
+
+.trips-page .active {
+    background: #dbeafe;
+
+    color: #1d4ed8;
+}
+
+.trips-page .completed {
+    background: #f3f4f6;
+
+    color: #374151;
+}
+
+.trips-page .cancelled {
+    background: #fee2e2;
+
+    color: #991b1b;
+}
+
+
+/* ========================================
+   CANCEL BUTTON
+======================================== */
+
+.cancel-btn {
+    margin-top: 1.2rem;
+
+    border: none;
+
+    background: black;
+
+    color: white;
+
+    padding: 0.8rem 1rem;
+
+    border-radius: 10px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+.cancel-btn:hover {
+    background: #dc2626;
+}
+
+
+/* ========================================
+   COMPLETED ACTIONS
+======================================== */
+
+.completed-actions {
+    margin-top: 1.3rem;
+}
+
+
+/* ========================================
+   BOOK AGAIN
+======================================== */
+
+.book-again-btn {
+    background: #ff385c;
+
+    color: white;
+
+    padding: 0.8rem 1.2rem;
+
+    border-radius: 10px;
+
+    text-decoration: none;
+
+    display: inline-block;
+}
+
+.book-again-btn:hover {
+    opacity: 0.9;
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 768px) {
+
+    .trip-card {
+        grid-template-columns: 1fr;
+    }
+
+    .trip-card img {
+        height: 240px;
+    }
+
+    .trip-footer {
+        flex-direction: column;
+
+        align-items: flex-start;
+
+        gap: 1rem;
+    }
+
+    .trip-dates {
+        flex-direction: column;
+
+        gap: 1rem;
+    }
+}

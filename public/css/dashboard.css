@@ -1,0 +1,161 @@
+/* ========================================
+   DASHBOARD PAGE
+======================================== */
+
+.dashboard-page {
+    padding: 2rem 0 4rem;
+}
+
+
+/* ========================================
+   DASHBOARD HEADER
+======================================== */
+
+.dashboard-header {
+    margin-bottom: 2rem;
+}
+
+.dashboard-header p {
+    color: #717171;
+}
+
+
+/* ========================================
+   STATS
+======================================== */
+
+.stats-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(auto-fit, minmax(220px, 1fr));
+
+    gap: 1.5rem;
+
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    background: white;
+
+    border: 1px solid #ddd;
+
+    border-radius: 20px;
+
+    padding: 2rem;
+
+    text-align: center;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.stat-card h3 {
+    font-size: 2rem;
+
+    margin-bottom: 0.5rem;
+}
+
+
+/* ========================================
+   DASHBOARD BOOKINGS
+======================================== */
+
+.dashboard-booking {
+    display: grid;
+
+    grid-template-columns: 120px 1fr auto;
+
+    gap: 1rem;
+
+    align-items: center;
+
+    border: 1px solid #ddd;
+
+    border-radius: 18px;
+
+    overflow: hidden;
+
+    margin-bottom: 1rem;
+
+    background: white;
+}
+
+.dashboard-booking img {
+    width: 120px;
+
+    height: 100px;
+
+    object-fit: cover;
+}
+
+
+/* ========================================
+   BOOKING INFORMATION
+======================================== */
+
+.booking-info {
+    padding: 1rem 0;
+}
+
+.booking-info p {
+    margin-bottom: 0.4rem;
+
+    color: #666;
+}
+
+.booking-price {
+    padding-right: 1.5rem;
+
+    font-weight: 700;
+
+    color: #ff385c;
+}
+
+.empty-text {
+    color: #717171;
+}
+
+
+/* ========================================
+   BOOKING RIGHT SECTION
+======================================== */
+
+.booking-right {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-end;
+
+    gap: 0.7rem;
+
+    padding-right: 1.5rem;
+}
+
+
+/* ========================================
+   DASHBOARD STATUS
+======================================== */
+
+.dashboard-status {
+    padding: 0.35rem 0.8rem;
+
+    border-radius: 999px;
+
+    font-size: 0.8rem;
+
+    font-weight: 600;
+}
+
+.dashboard-status.confirmed {
+    background: #dcfce7;
+
+    color: #166534;
+}
+
+.dashboard-status.cancelled {
+    background: #fee2e2;
+
+    color: #991b1b;
+}
