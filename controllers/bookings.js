@@ -24,13 +24,11 @@ module.exports.createBooking = async (req, res) => {
   // Prevent invalid dates
   if (checkOutDate <= checkInDate) {
     req.flash("error", "Check-out must be after check-in!");
-
     return res.redirect(`/listings/${id}`);
   }
 
   // Calculate nights
   const diffTime = checkOutDate - checkInDate;
-
   const nights = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
   // Calculate total price
@@ -40,16 +38,11 @@ module.exports.createBooking = async (req, res) => {
     listing: listing._id,
     status: "confirmed",
     checkIn: {
-      // Existing booking starts before new checkout
       $lt: checkOutDate,
     },
-
     checkOut: {
-      // Existing booking ends after new checkin
       $gt: checkInDate,
     },
-
-    //Booking overlaps if:newCheckIn < existingCheckOut AND newCheckOut > existingCheckIn
   });
 
   if (existingBooking) {
@@ -64,21 +57,16 @@ module.exports.createBooking = async (req, res) => {
   // Create booking
   const newBooking = new Booking({
     listing: listing._id,
-
     guest: req.user._id,
-
     checkIn: checkInDate,
-
     checkOut: checkOutDate,
-
     nights,
-
     totalPrice,
   });
 
   await newBooking.save();
 
-  // Send confirmation email
+  // Send confirmation email to guest
   let guestEmailSent = true;
 
   try {
@@ -93,6 +81,21 @@ module.exports.createBooking = async (req, res) => {
     guestEmailSent = false;
     console.error("Booking confirmation email failed:", emailError);
   }
+
+  // Send booking alert to host
+  try {
+    await sendHostBookingAlert(
+      listing.owner.email,
+      req.user.username,
+      listing.title,
+      checkInDate.toDateString(),
+      checkOutDate.toDateString(),
+    );
+  } catch (emailError) {
+    console.error("Host booking alert email failed:", emailError);
+  }
+
+  // Flash message
   if (guestEmailSent) {
     req.flash(
       "success",
@@ -105,26 +108,9 @@ module.exports.createBooking = async (req, res) => {
     );
   }
 
-  res.redirect("/bookings/trips");
-  // Send host booking alert
-  try {
-    await sendHostBookingAlert(
-      listing.owner.email,
-      req.user.username,
-      listing.title,
-      checkInDate.toDateString(),
-      checkOutDate.toDateString(),
-    );
-  } catch (emailError) {
-    console.error("Host booking alert email failed:", emailError);
-  }
-  req.flash(
-    "success",
-    "Booking confirmed! A confirmation email has been sent. If you don't see it in your inbox, please check your Spam or Junk folder.",
-  );
-  res.redirect("/bookings/trips");
+  // Final response — ONLY ONCE
+  return res.redirect("/bookings/trips");
 };
-
 module.exports.renderTrips = async (req, res) => {
   const bookings = await Booking.find({
     guest: req.user._id,
