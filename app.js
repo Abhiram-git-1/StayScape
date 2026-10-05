@@ -23,7 +23,7 @@ require("./config/passport");
 const User = require("./models/user");
 
 const app = express();
-
+app.set("trust proxy", 1);// trust first proxy
 //  Setup
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
