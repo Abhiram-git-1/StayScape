@@ -77,34 +77,51 @@ module.exports.createBooking = async (req, res) => {
   });
 
   await newBooking.save();
+
   // Send confirmation email
-  await sendBookingEmail(
-    req.user.email,
+  let guestEmailSent = true;
 
-    listing.title,
+  try {
+    await sendBookingEmail(
+      req.user.email,
+      listing.title,
+      checkInDate.toDateString(),
+      checkOutDate.toDateString(),
+      totalPrice,
+    );
+  } catch (emailError) {
+    guestEmailSent = false;
+    console.error("Booking confirmation email failed:", emailError);
+  }
+  if (guestEmailSent) {
+    req.flash(
+      "success",
+      "Booking confirmed! A confirmation email has been sent. If you don't see it in your inbox, please check your Spam or Junk folder.",
+    );
+  } else {
+    req.flash(
+      "success",
+      "Booking confirmed! We couldn't send the confirmation email, but your booking was saved successfully.",
+    );
+  }
 
-    checkInDate.toDateString(),
-
-    checkOutDate.toDateString(),
-
-    totalPrice,
-  );
-
+  res.redirect("/bookings/trips");
   // Send host booking alert
-  await sendHostBookingAlert(
-    listing.owner.email,
-
-    req.user.username,
-
-    listing.title,
-
-    checkInDate.toDateString(),
-
-    checkOutDate.toDateString(),
+  try {
+    await sendHostBookingAlert(
+      listing.owner.email,
+      req.user.username,
+      listing.title,
+      checkInDate.toDateString(),
+      checkOutDate.toDateString(),
+    );
+  } catch (emailError) {
+    console.error("Host booking alert email failed:", emailError);
+  }
+  req.flash(
+    "success",
+    "Booking confirmed! A confirmation email has been sent. If you don't see it in your inbox, please check your Spam or Junk folder.",
   );
-
-  req.flash("success", "Booking confirmed!");
-
   res.redirect("/bookings/trips");
 };
 
@@ -132,20 +149,18 @@ module.exports.renderTrips = async (req, res) => {
   res.render("bookings/trips", { bookings });
 };
 module.exports.cancelBooking = async (req, res) => {
-  const { bookingId } = req.params; // bookingID refers to the id of the booking we want to cancel
+  const { bookingId } = req.params;
 
   const booking = await Booking.findById(bookingId).populate("listing");
 
   if (!booking) {
     req.flash("error", "Booking not found!");
-
     return res.redirect("/bookings/trips");
   }
 
   // Security check
   if (!booking.guest.equals(req.user._id)) {
     req.flash("error", "Unauthorized action!");
-
     return res.redirect("/bookings/trips");
   }
 
@@ -153,13 +168,30 @@ module.exports.cancelBooking = async (req, res) => {
 
   await booking.save();
 
-  await sendCancellationEmail(
-    req.user.email,
+  // Send cancellation email
+  let emailSent = true;
 
-    booking.listing.title,
-  );
+  try {
+    await sendCancellationEmail(
+      req.user.email,
+      booking.listing.title,
+    );
+  } catch (emailError) {
+    emailSent = false;
+    console.error("Cancellation email failed:", emailError);
+  }
 
-  req.flash("success", "Booking cancelled!");
+  if (emailSent) {
+    req.flash(
+      "success",
+      "Booking cancelled successfully! A cancellation email has been sent. If you don't see it in your inbox, please check your Spam or Junk folder.",
+    );
+  } else {
+    req.flash(
+      "success",
+      "Booking cancelled successfully! However, we couldn't send the cancellation email.",
+    );
+  }
 
   res.redirect("/bookings/trips");
 };

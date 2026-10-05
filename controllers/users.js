@@ -22,7 +22,7 @@ module.exports.signup = async (req, res, next) => {
     // console.log(registereduser);
     req.flash(
       "success",
-      "Registration successful! Please check your email to verify your account.",
+      "Account created! A verification email has been sent. If you don't see it in your inbox, please check your Spam or Junk folder.",
     );
     res.redirect("/users/login");
   } catch (e) {
@@ -82,8 +82,10 @@ module.exports.forgotPassword = async (req, res) => {
   // Send email
   await sendResetPasswordEmail(user.email, resetURL);
 
-  req.flash("success", "Password reset email sent!");
-
+  req.flash(
+    "success",
+    "If the email address is registered, a password reset email has been sent. Please check your Spam or Junk folder if you don't see it.",
+  );
   res.redirect("/users/login");
 };
 
@@ -272,7 +274,9 @@ module.exports.resendVerificationEmail = async (req, res) => {
 
   await sendVerificationEmail(user.email, verificationURL);
 
-  req.flash("success", "Verification email sent successfully.");
-
+  req.flash(
+    "success",
+    "Verification email sent! If you don't see it in your inbox, please check your Spam or Junk folder.",
+  );
   res.redirect("/users/login");
 };
